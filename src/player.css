@@ -1,0 +1,327 @@
+.uvp-player {
+  box-sizing: border-box;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid #9f4bc1;
+  border-radius: 15px;
+  background: #151419;
+  box-shadow: 0 2px 8px #251c2a30;
+  isolation: isolate;
+}
+.uvp-video {
+  display: block;
+  width: 100%;
+  max-height: 65vh;
+  object-fit: contain;
+  transition: opacity 240ms ease;
+}
+.uvp-video-active {
+  position: relative;
+  z-index: 1;
+  opacity: 1;
+}
+.uvp-video-inactive {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+.uvp-player:fullscreen {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  max-width: none;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 0;
+  background: #000;
+  box-shadow: none;
+}
+.uvp-player:fullscreen .uvp-video {
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  aspect-ratio: auto !important;
+}
+.uvp-controls {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  pointer-events: none;
+  color: #fff;
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity 300ms ease,
+    visibility 0s linear;
+}
+.uvp-controls.uvp-controls-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 300ms ease,
+    visibility 0s linear 300ms;
+}
+.uvp-progress {
+  display: block;
+  width: 100%;
+  height: 4px;
+  margin: 0 0 6px;
+  padding: 0;
+  appearance: none;
+  border-radius: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.uvp-control-panel {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 0 6px 3px;
+  background: linear-gradient(transparent, rgb(0 0 0 / 84%));
+  pointer-events: auto;
+}
+.uvp-center-play-wrap {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+.uvp-center-play {
+  display: grid;
+  width: 68px;
+  height: 68px;
+  place-items: center;
+  padding: 0 0 0 4px;
+  border: 1px solid rgb(255 255 255 / 45%);
+  border-radius: 50%;
+  background: rgb(0 0 0 / 58%);
+  color: #fff;
+  cursor: pointer;
+  pointer-events: auto;
+  transition:
+    background-color 140ms ease,
+    scale 140ms ease;
+}
+.uvp-center-play:hover {
+  scale: 1.06;
+  background: #e94eaa;
+}
+.uvp-center-play svg {
+  display: block;
+}
+.uvp-progress::-webkit-slider-runnable-track {
+  height: 4px;
+  background: linear-gradient(
+    to right,
+    #f04eae 0 var(--uvp-progress),
+    #fff var(--uvp-progress) 100%
+  );
+}
+.uvp-progress::-moz-range-track {
+  height: 4px;
+  background: linear-gradient(
+    to right,
+    #f04eae 0 var(--uvp-progress),
+    #fff var(--uvp-progress) 100%
+  );
+}
+.uvp-progress::-moz-range-progress {
+  height: 4px;
+  background: transparent;
+}
+.uvp-progress::-webkit-slider-thumb,
+.uvp-volume::-webkit-slider-thumb {
+  width: 10px;
+  height: 10px;
+  appearance: none;
+  border: 0;
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 0 0 2px rgb(0 0 0 / 50%);
+}
+.uvp-progress::-webkit-slider-thumb {
+  margin-top: -3px;
+  transform: scale(0);
+  opacity: 0;
+  transition: transform 120ms ease;
+}
+.uvp-progress:hover::-webkit-slider-thumb,
+.uvp-progress:focus-visible::-webkit-slider-thumb {
+  transform: scale(1);
+  opacity: 1;
+}
+.uvp-progress::-moz-range-thumb,
+.uvp-volume::-moz-range-thumb {
+  width: 10px;
+  height: 10px;
+  border: 0;
+  border-radius: 50%;
+  background: white;
+}
+.uvp-progress::-moz-range-thumb {
+  transform: scale(0);
+  opacity: 0;
+  transition: transform 120ms ease;
+}
+.uvp-progress:hover::-moz-range-thumb,
+.uvp-progress:focus-visible::-moz-range-thumb {
+  transform: scale(1);
+  opacity: 1;
+}
+.uvp-control-row {
+  display: flex;
+  min-height: 27px;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+}
+.uvp-button {
+  display: inline-flex;
+  min-width: 20px;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+.uvp-button:hover {
+  color: #f27fc3;
+}
+.uvp-play {
+  flex: 0 0 24px;
+  width: 24px;
+  min-width: 24px;
+  height: 24px;
+  padding: 0;
+  line-height: 1;
+}
+.uvp-play svg {
+  display: block;
+  width: 15px;
+  height: 15px;
+}
+.uvp-skip {
+  font-size: 12px;
+}
+.uvp-time {
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.uvp-speaker svg,
+.uvp-fullscreen svg {
+  display: block;
+}
+.uvp-volume {
+  width: 75px;
+  height: 3px;
+  accent-color: #fff;
+}
+.uvp-spacer {
+  flex: 1;
+}
+.uvp-menu-wrap {
+  position: relative;
+}
+.uvp-more {
+  font-size: 13px;
+}
+.uvp-menu {
+  position: absolute;
+  right: 0;
+  bottom: 31px;
+  min-width: 138px;
+  padding: 7px 0;
+  border: 1px solid #d8d8dc;
+  border-radius: 3px;
+  background: #fff;
+  color: #25242a;
+  box-shadow: 0 4px 18px #0005;
+}
+.uvp-menu fieldset {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.uvp-menu-heading {
+  display: block;
+  padding: 5px 20px 7px;
+  color: #77737b;
+  font-size: 11px;
+}
+.uvp-menu-item {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 9px;
+  padding: 6px 14px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+}
+.uvp-menu-item .uvp-menu-check {
+  width: 12px;
+  color: #f04eae;
+  font-weight: 700;
+}
+.uvp-menu-item:disabled {
+  color: #343238;
+}
+.uvp-menu-item.uvp-selected {
+  font-weight: 600;
+}
+.uvp-speed {
+  min-width: 24px;
+  font-size: 12px;
+}
+.uvp-player:fullscreen .uvp-controls {
+  padding-bottom: 0;
+}
+.uvp-player:fullscreen .uvp-control-panel {
+  padding-bottom: 8px;
+}
+@media (max-width: 520px) {
+  .uvp-control-row {
+    gap: 5px;
+    font-size: 11px;
+  }
+  .uvp-volume {
+    width: 42px;
+  }
+  .uvp-skip {
+    font-size: 10px;
+  }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.not-sr-only {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: 0;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
